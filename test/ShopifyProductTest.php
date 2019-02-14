@@ -58,7 +58,7 @@ class ShopifyProductTest extends \PHPUnit_Framework_TestCase
         ];
         $this->mockClient->expects($this->once())
             ->method('call')
-            ->with('POST', 'products/123/extra_suffix', ["product" => $product]);
+            ->with('POST', 'products/123/extra_suffix', $product);
         $this->mockClient->products->customCreate(
             [
                 "description" => "The Amazing Franco Plan",

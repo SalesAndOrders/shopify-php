@@ -58,7 +58,7 @@ class ShopifyCollectTest extends \PHPUnit_Framework_TestCase
         ];
         $this->mockClient->expects($this->once())
             ->method('call')
-            ->with('POST', 'collects/123/extra_suffix', ["collect" => $collect]);
+            ->with('POST', 'collects/123/extra_suffix', $collect);
         $this->mockClient->collects->customCreate(
             [
                 "description" => "The Amazing Franco Plan",
