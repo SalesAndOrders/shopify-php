@@ -13,7 +13,7 @@ trait CommonCreate
         return $this->post($data);
     }
 
-    public function customCreate($data, $id, $suffix = '')
+    public function customCreate(array $data, $id, $suffix = '')
     {
         return $this->postCustom($data, $id, $suffix);
     }

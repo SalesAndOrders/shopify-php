@@ -60,7 +60,7 @@ class ShopifyRecurringApplicationChargeTest extends \PHPUnit_Framework_TestCase
         ];
         $this->mockClient->expects($this->once())
             ->method('call')
-            ->with('POST', 'recurring_application_charges/123/extra_suffix', ["recurring_application_charge" => $recurringCharges]);
+            ->with('POST', 'recurring_application_charges/123/extra_suffix', $recurringCharges);
         $this->mockClient->recurring_application_charges->customCreate(
             [
                 "description" => "The Amazing Franco Plan",
