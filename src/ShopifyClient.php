@@ -21,6 +21,7 @@ class ShopifyClient
         "shop",
         "variant",
         "recurring_application_charge",
+        "application_charge",
         "custom_collection",
         "smart_collection",
         "collect"
