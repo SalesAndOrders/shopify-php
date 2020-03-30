@@ -12,6 +12,11 @@ class ShopifyClient
     private $shopName;
     private $httpClient;
 
+    /**
+     * @var string
+     */
+    public static $apiVersion = '2020-01';
+
     private static $resources = [
         "order",
         "fulfillment",
@@ -66,7 +71,7 @@ class ShopifyClient
 
     private function uriBuilder($resource)
     {
-        return 'https://' . $this->shopName . '/admin/' . $resource . '.json';
+        return sprintf('https://%s/admin/api/%s/%s.json', $this->shopName, self::$apiVersion, $resource);
     }
 
     private function authHeaders()
