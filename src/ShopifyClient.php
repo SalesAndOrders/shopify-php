@@ -45,7 +45,7 @@ class ShopifyClient
 
     public function setAccessToken($accessToken)
     {
-        if (preg_match('/^([a-zA-Z0-9]{10,100})$/', $accessToken)===0) {
+        if (preg_match('/^([a-zA-Z0-9_]{10,100})$/', $accessToken)===0) {
             throw new \InvalidArgumentException("Access token should be between 10 and 100 letters and numbers");
         }
         $this->accessToken = $accessToken;
