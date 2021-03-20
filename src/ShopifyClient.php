@@ -6,6 +6,10 @@
 
 namespace Shopify;
 
+/**
+ * Class ShopifyClient
+ * @package Shopify
+ */
 class ShopifyClient
 {
     private $accessToken;
@@ -15,8 +19,11 @@ class ShopifyClient
     /**
      * @var string
      */
-    public static $apiVersion = '2020-01';
+    public static $apiVersion = '2020-10';
 
+    /**
+     * @var string[]
+     */
     private static $resources = [
         "order",
         "fulfillment",
@@ -32,17 +39,29 @@ class ShopifyClient
         "collect"
     ];
 
-    public function __construct($accessToken, $shopName)
+    /**
+     * ShopifyClient constructor.
+     * @param $accessToken
+     * @param $shopName
+     * @param null $newApiVersion
+     */
+    public function __construct($accessToken, $shopName, $newApiVersion = null)
     {
         foreach (self::$resources as $resource) {
             $className = 'Shopify\Shopify' . str_replace("_", "", ucwords($resource, "_"));
             $this->{$resource . "s"} = new $className($this);
+        }
+        if (!empty($apiVersion)) {
+            $this::$apiVersion = $newApiVersion;
         }
         $this->setAccessToken($accessToken);
         $this->setShopName($shopName);
         $this->setHttpClient();
     }
 
+    /**
+     * @param $accessToken
+     */
     public function setAccessToken($accessToken)
     {
         if (preg_match('/^([a-zA-Z0-9_]{10,100})$/', $accessToken)===0) {
@@ -51,6 +70,9 @@ class ShopifyClient
         $this->accessToken = $accessToken;
     }
 
+    /**
+     * @param $shopName
+     */
     public function setShopName($shopName)
     {
         if (!$this->isValidShopName($shopName)) {
@@ -61,6 +83,10 @@ class ShopifyClient
         $this->shopName = $shopName;
     }
 
+    /**
+     * @param $shopName
+     * @return bool
+     */
     private function isValidShopName($shopName)
     {
         if (preg_match('/^[a-zA-Z0-9\-]{3,100}\.myshopify\.(?:com|io)$/', $shopName)) {
@@ -69,11 +95,18 @@ class ShopifyClient
         return false;
     }
 
+    /**
+     * @param $resource
+     * @return string
+     */
     private function uriBuilder($resource)
     {
         return sprintf('https://%s/admin/api/%s/%s.json', $this->shopName, self::$apiVersion, $resource);
     }
 
+    /**
+     * @return string[]
+     */
     private function authHeaders()
     {
         return [
@@ -82,6 +115,13 @@ class ShopifyClient
         ];
     }
 
+    /**
+     * @param $method
+     * @param $resource
+     * @param null $payload
+     * @param array $parameters
+     * @return mixed
+     */
     public function call($method, $resource, $payload = null, $parameters = [])
     {
         if (!in_array($method, ["POST", "PUT", "PATCH", "GET", "DELETE", "HEAD"], true)) {
@@ -96,6 +136,9 @@ class ShopifyClient
         );
     }
 
+    /**
+     * @param HttpRequestInterface|null $client
+     */
     public function setHttpClient(HttpRequestInterface $client = null)
     {
         $this->httpClient = ($client ? $client : new CurlRequest());
