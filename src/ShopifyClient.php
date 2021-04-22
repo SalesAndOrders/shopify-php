@@ -19,7 +19,7 @@ class ShopifyClient
     /**
      * @var string
      */
-    public static $apiVersion = '2020-10';
+    public static $apiVersion = '2021-04';
 
     /**
      * @var string[]
