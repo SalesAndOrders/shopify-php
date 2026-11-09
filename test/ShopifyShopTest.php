@@ -6,7 +6,7 @@
 
 namespace Shopify;
 
-class ShopifyShopTest extends \PHPUnit_Framework_TestCase
+class ShopifyShopTest extends \PHPUnit\Framework\TestCase
 {
     public function testRead()
     {
@@ -14,6 +14,6 @@ class ShopifyShopTest extends \PHPUnit_Framework_TestCase
         $client->setHttpClient(new MockRequest());
         $out = $client->shops->read();
         $this->assertEquals($out[0], "GET");
-        $this->assertEquals($out[1], "https://040350450399894.myshopify.com/admin/shop.json");
+        $this->assertEquals($out[1], "https://040350450399894.myshopify.com/admin/api/" . ShopifyClient::$apiVersion . "/shop.json");
     }
 }

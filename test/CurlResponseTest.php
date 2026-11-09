@@ -6,11 +6,11 @@
 
 namespace Shopify;
 
-class CurlResponseTest extends \PHPUnit_Framework_TestCase
+class CurlResponseTest extends \PHPUnit\Framework\TestCase
 {
     private $mockResponse;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mockResponse = file_get_contents('test/data/create_order_response.txt');
     }

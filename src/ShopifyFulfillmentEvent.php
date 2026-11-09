@@ -34,13 +34,13 @@ class ShopifyFulfillmentEvent extends ShopifyObject
     protected function prefix($orderId, $fulfillmentId)
     {
         return join(
-            DIRECTORY_SEPARATOR,
+            '/',
             [
                 ShopifyOrder::PLURAL,
                 $orderId,
                 ShopifyFulfillment::PLURAL,
                 $fulfillmentId
             ]
-        ) . DIRECTORY_SEPARATOR;
+        ) . '/';
     }
 }

@@ -21,19 +21,19 @@ class ShopifyOrder extends ShopifyObject
 
     public function close($id)
     {
-        $resource = join(DIRECTORY_SEPARATOR, [self::PLURAL, $id, "close"]);
+        $resource = join('/', [self::PLURAL, $id, "close"]);
         return $this->client->call("POST", $resource, []);
     }
 
     public function open($id)
     {
-        $resource = join(DIRECTORY_SEPARATOR, [self::PLURAL, $id, "open"]);
+        $resource = join('/', [self::PLURAL, $id, "open"]);
         return $this->client->call("POST", $resource, []);
     }
 
     public function cancel($id, array $data = [])
     {
-        $resource = join(DIRECTORY_SEPARATOR, [self::PLURAL, $id, "cancel"]);
+        $resource = join('/', [self::PLURAL, $id, "cancel"]);
         return $this->client->call("POST", $resource, $data);
     }
 }
