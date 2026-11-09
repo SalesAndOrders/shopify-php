@@ -40,6 +40,6 @@ class ShopifyFulfillment extends ShopifyObject
 
     protected function prefix($orderId)
     {
-        return ShopifyOrder::PLURAL . DIRECTORY_SEPARATOR . $orderId . DIRECTORY_SEPARATOR;
+        return ShopifyOrder::PLURAL . '/' . $orderId . '/';
     }
 }

@@ -34,7 +34,7 @@ class ShopifyVariant extends ShopifyObject
     protected function prefix($parentId)
     {
         if ($parentId) {
-            return ShopifyProduct::PLURAL . DIRECTORY_SEPARATOR . $parentId . DIRECTORY_SEPARATOR;
+            return ShopifyProduct::PLURAL . '/' . $parentId . '/';
         }
         return '';
     }

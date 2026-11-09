@@ -6,11 +6,11 @@
 
 namespace Shopify;
 
-class ShopifyOrderTest extends \PHPUnit_Framework_TestCase
+class ShopifyOrderTest extends \PHPUnit\Framework\TestCase
 {
     private $mockClient;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mockClient = $this->getMockBuilder('Shopify\ShopifyClient')
             ->setConstructorArgs(['abc', '040350450399894.myshopify.com'])

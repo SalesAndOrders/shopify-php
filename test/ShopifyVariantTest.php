@@ -6,13 +6,12 @@
 
 namespace Shopify;
 
-require 'mock/MockRequest.php';
 
-class ShopifyVariantTest extends \PHPUnit_Framework_TestCase
+class ShopifyVariantTest extends \PHPUnit\Framework\TestCase
 {
     private $mockClient;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->mockClient = $this->getMockBuilder('Shopify\ShopifyClient')
             ->setConstructorArgs(['abc', '040350450399894.myshopify.com'])
@@ -41,7 +40,7 @@ class ShopifyVariantTest extends \PHPUnit_Framework_TestCase
         $client->setHttpClient(new MockRequest());
         $out = $client->variants->create(235, ['title' => 'cool product']);
         $this->assertEquals($out[0], "POST");
-        $this->assertEquals($out[1], "https://040350450399894.myshopify.com/admin/products/235/variants.json");
+        $this->assertEquals($out[1], "https://040350450399894.myshopify.com/admin/api/" . ShopifyClient::$apiVersion . "/products/235/variants.json");
         $this->assertEquals($out[3], ['variant' => ['title' => 'cool product']]);
     }
 

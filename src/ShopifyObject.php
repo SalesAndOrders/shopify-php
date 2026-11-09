@@ -17,7 +17,7 @@ class ShopifyObject
 
     protected function get($id, $prefix = '')
     {
-        $resource = $prefix . static::PLURAL . DIRECTORY_SEPARATOR . $id;
+        $resource = $prefix . static::PLURAL . '/' . $id;
         return $this->client->call("GET", $resource, null, []);
     }
 
@@ -41,13 +41,13 @@ class ShopifyObject
 
     protected function delete($id, $prefix = '')
     {
-        $resource = $prefix . static::PLURAL . DIRECTORY_SEPARATOR . $id;
+        $resource = $prefix . static::PLURAL . '/' . $id;
         return $this->client->call("DELETE", $resource, null, []);
     }
 
     protected function put($id, $data, $prefix = '')
     {
-        $resource = $prefix . static::PLURAL . DIRECTORY_SEPARATOR . $id;
+        $resource = $prefix . static::PLURAL . '/' . $id;
         return $this->client->call("PUT", $resource, [static::SINGULAR => $data], []);
     }
 }

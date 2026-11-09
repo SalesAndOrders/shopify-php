@@ -10,6 +10,7 @@ namespace Shopify;
  * Class ShopifyClient
  * @package Shopify
  */
+#[\AllowDynamicProperties]
 class ShopifyClient
 {
     private $accessToken;
@@ -64,8 +65,10 @@ class ShopifyClient
      */
     public function setAccessToken($accessToken)
     {
-        if (preg_match('/^([a-zA-Z0-9_]{10,100})$/', $accessToken)===0) {
-            throw new \InvalidArgumentException("Access token should be between 10 and 100 letters and numbers");
+        // Shopify tokens are opaque: accept 1-1024 printable ASCII characters without spaces.
+        // (Excluding whitespace and control characters keeps the header safe.)
+        if (!is_string($accessToken) || preg_match('/^[\x21-\x7E]{1,1024}$/', $accessToken) !== 1) {
+            throw new \InvalidArgumentException("Access token must be 1-1024 printable characters without spaces");
         }
         $this->accessToken = $accessToken;
     }
